@@ -1,13 +1,16 @@
+import {listarTareasPendientesPorUsuariosRegistradosEnLaApi} from "././src/index.js"
 import promptSync from 'prompt-sync';
 
 const prompt = promptSync();
 
-const escogerOfertas = (opcion) => {
+//Se crea funcion escogerOfertas asincrona para que espere las respuestas enviadas desde ejericios
+const escogerOfertas = async (opcion) => {
 
-    switch (opcion) {
+    switch (Number(opcion)) {
 
         case 1:
             console.log("Ejercicio 1");
+            await listarTareasPendientesPorUsuariosRegistradosEnLaApi()
             break;
 
         case 2:
@@ -35,8 +38,8 @@ const escogerOfertas = (opcion) => {
     }
 };
 
-
-const opcionesDeMenu = () => {
+//y acá en opcionesDeMenu se debe esperar aescogerOfertas
+const opcionesDeMenu = async () => {
 
     let opcion;
 
@@ -55,7 +58,7 @@ const opcionesDeMenu = () => {
             prompt("Ingrese el número del ejercicio que desea probar: ")
         );
 
-        escogerOfertas(opcion);
+        await escogerOfertas(opcion);
 
     } while (opcion !== 6);
 };
