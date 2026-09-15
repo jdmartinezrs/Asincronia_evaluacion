@@ -1,7 +1,9 @@
 
 import promptSync from 'prompt-sync';
 
-import { listarTareasPendientesPorUsuariosRegistradosEnLaApi,  listarUsuarioAlbumesFotos  } from "././src/index.js";
+import { listarTareasPendientesPorUsuariosRegistradosEnLaApi,
+         listarUsuarioAlbumesFotos,
+         listarPostConComentarios } from "././src/index.js";
 
 
 const prompt = promptSync();
@@ -47,6 +49,7 @@ const opcionesDeMenu = async () => {
             case 3:
 
                 console.log("Ejercicio 3");
+                await listarPostConComentarios();
 
                 break;
 
