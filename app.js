@@ -1,8 +1,8 @@
 
 import promptSync from 'prompt-sync';
 
-import { listarTareasPendientesPorUsuariosRegistradosEnLaApi } from "./ejercicio1.js";
-import { listarUsuarioAlbumesFotos } from "./ejercicio2.js";
+import { listarTareasPendientesPorUsuariosRegistradosEnLaApi,  listarUsuarioAlbumesFotos  } from "././src/index.js";
+
 
 const prompt = promptSync();
 
@@ -13,16 +13,16 @@ const opcionesDeMenu = async () => {
 
     do {
 
-        console.log("\n======================================");
         console.log("Bienvenido al programa evaluación asincronía");
-        console.log("======================================");
         console.log("Ingrese un número según la opción que desea escoger");
         console.log("1. Ejercicio 1");
         console.log("2. Ejercicio 2");
         console.log("3. Ejercicio 3");
-        console.log("0. Salir");
+        console.log("4. Ejercicio 4");
+        console.log("5. Ejercicio 5");
+        console.log("6. Salir");
 
-        opcion = Number(prompt("Seleccione una opción: "));
+        opcion = Number(prompt("Ingrese una opción: "));
 
         switch (opcion) {
 
@@ -51,22 +51,30 @@ const opcionesDeMenu = async () => {
                 break;
 
 
-            case 0:
+            case 4:
+
+                console.log("Ejercicio 4");
+
+                break;
+
+
+            case 5:
+
+                console.log("Ejercicio 5");
+
+                break;
+
+
+            case 6:
 
                 console.log("Programa finalizado.");
 
                 break;
-
-
-            default:
-
-                console.log("Opción no válida.");
-
-                break;
         }
 
-    } while (opcion !== 0);
+    } while (opcion !== 6);
 };
 
 
 opcionesDeMenu();
+
