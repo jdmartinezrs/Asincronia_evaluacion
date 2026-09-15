@@ -1,66 +1,9 @@
 
 import promptSync from "prompt-sync";
-import { api_url } from "../utils/config.js";
+import { obtenerPosts, obtenerComentarios } from "../utils/api.js";
+import { buscarPorPropiedad } from "../utils/data.js";
 
 const prompt = promptSync();
-
-
-// =====================================================
-// SOLICITUD HTTP
-// Solicita los posts a la API
-// =====================================================
-
-const obtenerPosts = async () => {
-
-    // SOLICITUD HTTP:
-    // Se realiza una petición GET al recurso posts
-    const respuesta = await fetch(`${api_url}/posts`);
-
-    // CONVERSIÓN DE LA RESPUESTA:
-    // Se convierte el cuerpo de la respuesta a formato JSON
-    return await respuesta.json();
-};
-
-
-// =====================================================
-// SOLICITUD HTTP CON PARÁMETROS
-// Solicita los comentarios de un post
-// =====================================================
-
-const obtenerComentarios = async (postId) => {
-
-    // ENVÍO DE PARÁMETRO:
-    // Se envía el ID del post mediante el parámetro postId
-    const respuesta = await fetch(
-        `${api_url}/comments?postId=${postId}`
-    );
-
-    // CONVERSIÓN DE LA RESPUESTA:
-    // Se convierte la respuesta recibida a formato JSON
-    return await respuesta.json();
-};
-
-
-// =====================================================
-// PROCESAMIENTO DE DATOS
-// Busca un post por su título
-// =====================================================
-
-const buscarPost = (posts, nombreBuscado) => {
-
-    for (const post of posts) {
-
-        // DESESTRUCTURACIÓN:
-        // Se extrae el título del objeto post
-        const { title } = post;
-
-        if (title.toLowerCase() === nombreBuscado.toLowerCase()) {
-            return post;
-        }
-    }
-
-    return null;
-};
 
 
 // =====================================================
@@ -138,8 +81,9 @@ export const listarPostConComentarios = async () => {
 
         // PROCESAMIENTO DE DATOS:
         // Se busca el post que coincida con el nombre ingresado
-        const postEncontrado = buscarPost(
+        const postEncontrado = buscarPorPropiedad(
             posts,
+            "title",
             nombreBuscado
         );
 

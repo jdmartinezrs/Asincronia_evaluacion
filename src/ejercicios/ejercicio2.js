@@ -1,81 +1,9 @@
 
 import promptSync from "prompt-sync";
-import { api_url } from "../utils/config.js";
+import { obtenerUsuarios, obtenerAlbumes, obtenerFotos } from "../utils/api.js";
+import { buscarPorPropiedad } from "../utils/data.js";
 
 const prompt = promptSync();
-
-
-// =====================================================
-// SOLICITUD HTTP
-// Solicita los usuarios a la API
-// =====================================================
-
-const obtenerUsuarios = async () => {
-
-    // SOLICITUD HTTP:
-    // Se realiza una petición GET al recurso users
-    const respuesta = await fetch(`${api_url}/users`);
-
-    // CONVERSIÓN DE LA RESPUESTA:
-    // Se convierte el cuerpo de la respuesta a formato JSON
-    return await respuesta.json();
-};
-
-
-// =====================================================
-// SOLICITUD HTTP CON PARÁMETROS
-// Solicita los álbumes relacionados con un usuario
-// =====================================================
-
-const obtenerAlbumes = async (userId) => {
-
-    // ENVÍO DE PARÁMETRO:
-    // El ID del usuario se envía mediante el parámetro userId
-    const respuesta = await fetch(`${api_url}/albums?userId=${userId}`);
-
-    // CONVERSIÓN DE LA RESPUESTA:
-    // Se convierte la respuesta recibida a un objeto/array JavaScript
-    return await respuesta.json();
-};
-
-
-// =====================================================
-// SOLICITUD HTTP CON PARÁMETROS
-// Solicita las fotografías relacionadas con un álbum
-// =====================================================
-
-const obtenerFotos = async (albumId) => {
-
-    // ENVÍO DE PARÁMETRO:
-    // El ID del álbum se envía mediante el parámetro albumId
-    const respuesta = await fetch(`${api_url}/photos?albumId=${albumId}`);
-
-    // CONVERSIÓN DE LA RESPUESTA:
-    // Se convierte la respuesta recibida a formato JSON
-    return await respuesta.json();
-};
-
-
-// =====================================================
-// PROCESAMIENTO DE DATOS
-// Busca un usuario por su username
-// =====================================================
-
-const buscarUsuario = (usuarios, usernameBuscado) => {
-
-    for (const usuario of usuarios) {
-
-        // DESESTRUCTURACIÓN:
-        // Se extrae la propiedad username del objeto usuario
-        const { username } = usuario;
-
-        if (username.toLowerCase() === usernameBuscado.toLowerCase()) {
-            return usuario;
-        }
-    }
-
-    return null;
-};
 
 
 // =====================================================
@@ -232,8 +160,9 @@ export const listarUsuarioAlbumesFotos = async () => {
 
         // PROCESAMIENTO DE DATOS:
         // Se busca el usuario que coincida con el username ingresado
-        const usuarioEncontrado = buscarUsuario(
+        const usuarioEncontrado = buscarPorPropiedad(
             usuarios,
+            "username",
             usernameBuscado
         );
 

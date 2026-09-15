@@ -3,66 +3,8 @@
 debe ser un nuevo arreglo solo con el nombre y teléfono de cada usuario.
  */
 
-import { api_url } from "../utils/config.js";
-
-// =====================================================
-// SOLICITUD HTTP
-// Consulta todos los usuarios de la API
-// =====================================================
-
-const obtenerUsuarios = async () => {
-
-    try {
-
-        // SOLICITUD HTTP:
-        // Se realiza una petición GET al recurso users
-        const respuesta = await fetch(`${api_url}/users`);
-
-        // CONVERSIÓN DE LA RESPUESTA:
-        // Se convierte el cuerpo de la respuesta a formato JSON
-        return await respuesta.json();
-
-    } catch (error) {
-
-        // MANEJO DE ERRORES:
-        // Captura errores producidos durante la solicitud
-        console.log("Ocurrió un error al consultar los usuarios:", error);
-
-        return [];
-    }
-};
-
-
-// =====================================================
-// PROCESAMIENTO DE DATOS
-// Modifica la estructura de los usuarios
-// =====================================================
-
-const modificarUsuarios = (usuarios) => {
-
-    // NUEVO ARREGLO:
-    // Se crea un arreglo vacío para almacenar únicamente
-    // el nombre y teléfono de cada usuario
-    const usuariosModificados = [];
-
-    for (const usuario of usuarios) {
-
-        // DESESTRUCTURACIÓN:
-        // Se extraen solamente las propiedades necesarias
-        const {
-            name,
-            phone
-        } = usuario;
-
-        // Se agrega un nuevo objeto al arreglo
-        usuariosModificados.push({
-            name,
-            phone
-        });
-    }
-
-    return usuariosModificados;
-};
+import { obtenerUsuarios } from "../utils/api.js";
+import { extraerPropiedades } from "../utils/data.js";
 
 
 // =====================================================
@@ -76,8 +18,8 @@ export const listarUsuariosNombreTelefono = async () => {
     const usuarios = await obtenerUsuarios();
 
     // PROCESAMIENTO DE DATOS:
-    // Se crea un nuevo arreglo con la estructura solicitada
-    const usuariosModificados = modificarUsuarios(usuarios);
+    // Se crea un nuevo arreglo con la estructura solicitada usando función genérica
+    const usuariosModificados = extraerPropiedades(usuarios, ["name", "phone"]);
 
     // PRESENTACIÓN DE DATOS:
     // Se muestra el nuevo arreglo en consola

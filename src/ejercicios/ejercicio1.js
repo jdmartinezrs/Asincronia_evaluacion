@@ -2,19 +2,7 @@
 1. Listar todas las tareas pendientes por cada usuario registrado en la API
 */
 
-import { api_url } from "../utils/config.js"
-
-//Función asíncrona para solicitar los usuarios a la API y retornar la respuesta convertida a JSON
-const obtenerUsuarios = async () => {
-    const respuesta = await fetch(`${api_url}/users`)
-    return await respuesta.json()
-}
-
-//Función asíncrona para solicitar las tareas a la API y retornar la respuesta convertida a JSON
-const obtenerTareas = async () => {
-    const respuesta = await fetch(`${api_url}/todos`)
-    return await respuesta.json()
-}
+import { obtenerUsuarios, obtenerTareas } from "../utils/api.js"
 
 //Función para mostrar las tareas pendientes de un usuario.
 //Recibe las tareas para recorrerlas y el usuario para identificar cuáles le pertenecen.
