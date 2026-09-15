@@ -4,7 +4,7 @@ import promptSync from 'prompt-sync';
 import { listarTareasPendientesPorUsuariosRegistradosEnLaApi,
          listarUsuarioAlbumesFotos,
          listarPostConComentarios,
-        listarUsuariosNombreTelefono } from "././src/index.js";
+         listarUsuariosNombreTelefono } from "././src/index.js";
 
 
 const prompt = promptSync();
