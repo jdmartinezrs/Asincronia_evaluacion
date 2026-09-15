@@ -7,7 +7,8 @@ const prompt = promptSync();
 const escogerOfertas = async (opcion) => {
 
     switch (Number(opcion)) {
-
+        
+   //Ejecutar el ejercicio 1 y esperar la resolución de su promesa antes de continuar
         case 1:
             console.log("Ejercicio 1");
             await listarTareasPendientesPorUsuariosRegistradosEnLaApi()
