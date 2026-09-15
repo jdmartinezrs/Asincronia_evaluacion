@@ -1,34 +1,55 @@
 /*
 1. Listar todas las tareas pendientes por cada usuario registrado en la API
 */
+
 import { api_url } from "../utils/config.js"
 
+//Función asíncrona para solicitar los usuarios a la API y retornar la respuesta convertida a JSON
+const obtenerUsuarios = async () => {
+    const respuesta = await fetch(`${api_url}/users`)
+    return await respuesta.json()
+}
+
+//Función asíncrona para solicitar las tareas a la API y retornar la respuesta convertida a JSON
+const obtenerTareas = async () => {
+    const respuesta = await fetch(`${api_url}/todos`)
+    return await respuesta.json()
+}
+
+//Función para mostrar las tareas pendientes de un usuario.
+//Recibe las tareas para recorrerlas y el usuario para identificar cuáles le pertenecen.
+const mostrarTaresPendientes = async (tareas, usuario) => {
+    //Destructurar los datos necesarios del usuario
+    const { id, name } = usuario
+
+    console.log("*".repeat(30))
+    console.log(`Usuario: ${name}`)
+    console.log("Tareas pendientes:")
+
+    //Recorrer las tareas para identificar las pendientes del usuario
+    for (const { userId, title, completed } of tareas) {
+
+        if (userId === id && completed === false) {
+            console.log(`-${title}`)
+
+        }
+    }
+}
+
+//Función asíncrona que obtiene los usuarios y sus tareas desde la API,
+//recorre cada usuario y muestra sus tareas pendientes.
+//Se exporta para poder ejecutarla desde otros archivos, como el menú.
 export const listarTareasPendientesPorUsuariosRegistradosEnLaApi = async () => {
     try {
-        //Fetch para obtener usuarios
-        const respuestaUsers = await fetch(`${api_url}/users`)
-        const dataUsers = await respuestaUsers.json()
-
-
-        //Fetch para obtener  Tareas
-        const respuestaTodos = await fetch(`${api_url}/todos`)
-        const dataTodos = await respuestaTodos.json()
-
-        //Recorrer usuarios 
-        for (const dataUser of dataUsers) {
-            console.log("*".repeat(30));
-            console.log("*".repeat(30));
-            console.log(`Usuario: ${dataUser.name}`)
-            console.log("Tareas pendientes: ")
-
-            for (const dataTodo of dataTodos) {
-                //Verificar tarea pertenezca al usuario y esté pendiente 
-                if (dataTodo.userId === dataUser.id && dataTodo.completed === false) {
-                    console.log(`-${dataTodo.title}`)
-
-                }
-            }
+         //Esperar la resolución de la promesa con los datos de los usuarios
+        const usuarios = await obtenerUsuarios()
+        //Obtener datos de tareas
+        const tareas = await obtenerTareas()
+          //Recorrer cada usuario y mostrar sus tareas pendientes
+        for (const usuario of usuarios) {
+            mostrarTaresPendientes(tareas, usuario)
         }
+//Capturar y mostrar cualquier error producido durante la ejecución de las operaciones asíncronas
     } catch (error) {
         console.log("Ocurrió un error", error)
     }
