@@ -12,23 +12,28 @@ import { api_url } from "./config.js"
  * @returns {Promise<Array|Object>} - Respuesta convertida a JSON o array vacío en caso de error
  */
 const fetchAPI = async (endpoint, params = {}) => {
-    // Construir URL con parámetros de consulta si existen
-    const url = new URL(`${api_url}${endpoint}`)
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    
+    let queryString = ''
+    let primerParametro = true
+
+    for (const key in params) {
+        if (Object.prototype.hasOwnProperty.call(params, key)) {
+            const separador = primerParametro ? '?' : '&'
+            // Concatenación directa de cadenas sin template literals
+            queryString = queryString + separador + key + '=' + params[key]
+            primerParametro = false
+        }
+    }
+
+    const urlCompleta = api_url + endpoint + queryString
+
     try {
-        // Realizar petición HTTP GET
-        const respuesta = await fetch(url)
-        
-        // Convertir respuesta a JSON
+        const respuesta = await fetch(urlCompleta)
         return await respuesta.json()
     } catch (error) {
-        // Manejo centralizado de errores
-        console.error(`Error en ${endpoint}:`, error)
+        console.error('Error en ' + endpoint + ':', error)
         return []
     }
 }
-
 // =====================================================
 // FUNCIONES ESPECÍFICAS PARA CADA RECURSO DE LA API
 // Reutilizables en todos los ejercicios

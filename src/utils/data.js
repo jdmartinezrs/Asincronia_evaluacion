@@ -1,46 +1,76 @@
 /**
  * Módulo de utilidades para procesamiento de datos
- * Implementa el principio DRY con funciones genéricas reutilizables
+ * Implementado usando bucles `for...of`
  */
 
 /**
- * Función genérica para buscar un elemento en un array por una propiedad
- * @param {Array} array - Array donde buscar
- * @param {string} propiedad - Nombre de la propiedad a comparar
- * @param {string} valorBuscado - Valor a buscar (comparación case-insensitive)
- * @returns {Object|null} - Elemento encontrado o null si no existe
+ * Normaliza una cadena a minúsculas iterando carácter por carácter
+ */
+const aMinusculas = (texto) => {
+    if (typeof texto !== 'string') return ''
+    let resultado = ''
+    
+    for (const caracter of texto) {
+        const codigo = caracter.charCodeAt(0)
+        // Rango ASCII para letras mayúsculas (A-Z)
+        if (codigo >= 65 && codigo <= 90) {
+            resultado += String.fromCharCode(codigo + 32)
+        } else {
+            resultado += caracter
+        }
+    }
+    return resultado
+}
+
+/**
+ * Busca un elemento en un array por una propiedad (case-insensitive)
  */
 export const buscarPorPropiedad = (array, propiedad, valorBuscado) => {
-    return array.find(item => 
-        item[propiedad]?.toLowerCase() === valorBuscado.toLowerCase()
-    ) || null
+    const valorBuscadoMinuscula = aMinusculas(valorBuscado)
+
+    for (const item of array) {
+        if (item && item[propiedad] !== undefined && item[propiedad] !== null) {
+            const valorPropiedad = aMinusculas(String(item[propiedad]))
+            if (valorPropiedad === valorBuscadoMinuscula) {
+                return item // Retorna inmediatamente al encontrarlo
+            }
+        }
+    }
+    return null
 }
 
 /**
- * Función genérica para filtrar elementos de un array por una propiedad
- * @param {Array} array - Array a filtrar
- * @param {string} propiedad - Nombre de la propiedad para filtrar
- * @param {*} valor - Valor que debe tener la propiedad
- * @returns {Array} - Array filtrado
+ * Filtra elementos de un array por el valor exacto de una propiedad
  */
 export const filtrarPorPropiedad = (array, propiedad, valor) => {
-    return array.filter(item => item[propiedad] === valor)
+    const resultado = []
+    
+    for (const item of array) {
+        if (item && item[propiedad] === valor) {
+            resultado[resultado.length] = item
+        }
+    }
+    return resultado
 }
 
 /**
- * Función genérica para transformar objetos extrayendo solo ciertas propiedades
- * @param {Array} array - Array de objetos a transformar
- * @param {Array} propiedades - Array de nombres de propiedades a mantener
- * @returns {Array} - Array de objetos con solo las propiedades especificadas
+ * Transforma objetos extrayendo solo ciertas propiedades
  */
 export const extraerPropiedades = (array, propiedades) => {
-    return array.map(item => {
+    const resultado = []
+    
+    for (const item of array) {
         const nuevoObjeto = {}
-        propiedades.forEach(prop => {
-            if (item[prop] !== undefined) {
-                nuevoObjeto[prop] = item[prop]
+        
+        if (item) {
+            for (const prop of propiedades) {
+                if (item[prop] !== undefined) {
+                    nuevoObjeto[prop] = item[prop]
+                }
             }
-        })
-        return nuevoObjeto
-    })
+        }
+        
+        resultado[resultado.length] = nuevoObjeto
+    }
+    return resultado
 }
