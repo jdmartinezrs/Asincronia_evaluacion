@@ -32,11 +32,11 @@ Asincronia_evaluacion/
 ├── src/
 │   ├── index.js                    # Archivo barril que exporta todos los módulos
 │   ├── ejercicios/
-│   │   ├── ejercicio1.js          # Tareas pendientes por usuario
-│   │   ├── ejercicio2.js          # Usuario con álbumes y fotos
-│   │   ├── ejercicio3.js          # Posts con comentarios
-│   │   ├── ejercicio4.js          # Usuarios simplificados
-│   │   └── ejercicio5.js          # Usuarios completos
+│   │   ├── ejercicio1TareasPendientesPorUsuario.js # Tareas pendientes por usuario
+│   │   ├── ejercicio2UsuarioAlbumesFotografias.js  # Usuario con álbumes y fotos
+│   │   ├── ejercicio3PostsConComentarios.js        # Posts con comentarios
+│   │   ├── ejercicio4UsuariosSimplificados.js      # Usuarios simplificados
+│   │   └── ejercicio5UsuariosCompletos.js          # Usuarios completos
 │   ├── utils/
 │   │   ├── api.js                 # Módulo centralizado de peticiones HTTP
 │   │   ├── config.js              # Configuración de la API

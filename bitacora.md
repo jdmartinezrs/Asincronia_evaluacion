@@ -87,7 +87,7 @@ Desarrollar una aplicación en Node.js que realice peticiones a la API pública 
 - **Commit**: "feat: listar tareas pendientes por usuarios registrados"
 - **Descripción**: Listar todas las tareas pendientes por cada usuario
 - **Archivos creados**:
-  - `src/ejercicios/ejercicio1.js`
+  - `src/ejercicios/ejercicio1TareasPendientesPorUsuario.js`
 - **Lógica implementada**:
   - Obtención de usuarios y tareas desde la API
   - Filtrado de tareas por usuario y estado (completed: false)
@@ -102,7 +102,7 @@ Desarrollar una aplicación en Node.js que realice peticiones a la API pública 
 - **Commit**: "feat: listar usuario con sus álbumes y fotografías"
 - **Descripción**: Buscar usuario por username y mostrar sus álbumes con fotos
 - **Archivos creados**:
-  - `src/ejercicios/ejercicio2.js`
+  - `src/ejercicios/ejercicio2UsuarioAlbumesFotografias.js`
 - **Lógica implementada**:
   - Solicitud de username por teclado
   - Búsqueda de usuario por propiedad
@@ -118,7 +118,7 @@ Desarrollar una aplicación en Node.js que realice peticiones a la API pública 
 - **Commit**: "feat: filtrar posts y consultar sus comentarios"
 - **Descripción**: Filtrar posts por nombre y agregar comentarios
 - **Archivos creados**:
-  - `src/ejercicios/ejercicio3.js`
+  - `src/ejercicios/ejercicio3PostsConComentarios.js`
 - **Lógica implementada**:
   - Solicitud de nombre de post por teclado
   - Búsqueda de post por título
@@ -133,7 +133,7 @@ Desarrollar una aplicación en Node.js que realice peticiones a la API pública 
 - **Commit**: "feat: Consultar todos los usuarios y modificar la respuesta"
 - **Descripción**: Extraer solo nombre y teléfono de usuarios
 - **Archivos creados**:
-  - `src/ejercicios/ejercicio4.js`
+  - `src/ejercicios/ejercicio4UsuariosSimplificados.js`
 - **Lógica implementada**:
   - Obtención de todos los usuarios
   - Transformación del array extrayendo propiedades específicas
@@ -147,7 +147,7 @@ Desarrollar una aplicación en Node.js que realice peticiones a la API pública 
 - **Commit**: "feat: iniciando ejercicio 5"
 - **Descripción**: Obtener usuarios con todas sus relaciones (posts, comentarios, álbumes, fotos)
 - **Archivos creados**:
-  - `src/ejercicios/ejercicio5.js`
+  - `src/ejercicios/ejercicio5UsuariosCompletos.js`
 - **Lógica implementada**:
   - Petición única de usuarios
   - Agregación de posts con comentarios por usuario
@@ -187,11 +187,11 @@ Asincronia_evaluacion/
 ├── src/
 │   ├── index.js             # Archivo barril
 │   ├── ejercicios/          # Casos de uso
-│   │   ├── ejercicio1.js
-│   │   ├── ejercicio2.js
-│   │   ├── ejercicio3.js
-│   │   ├── ejercicio4.js
-│   │   └── ejercicio5.js
+│   │   ├── ejercicio1TareasPendientesPorUsuario.js
+│   │   ├── ejercicio2UsuarioAlbumesFotografias.js
+│   │   ├── ejercicio3PostsConComentarios.js
+│   │   ├── ejercicio4UsuariosSimplificados.js
+│   │   └── ejercicio5UsuariosCompletos.js
 │   ├── utils/               # Utilidades reutilizables
 │   │   ├── api.js          # Peticiones HTTP
 │   │   ├── config.js       # Configuración
@@ -230,11 +230,11 @@ Asincronia_evaluacion/
 - `src/utils/api.js`: 68 líneas
 - `src/utils/config.js`: 2 líneas
 - `src/utils/data.js`: 46 líneas
-- `src/ejercicios/ejercicio1.js`: 45 líneas
-- `src/ejercicios/ejercicio2.js`: 210 líneas
-- `src/ejercicios/ejercicio3.js`: 131 líneas
-- `src/ejercicios/ejercicio4.js`: 39 líneas
-- `src/ejercicios/ejercicio5.js`: 136 líneas
+- `src/ejercicios/ejercicio1TareasPendientesPorUsuario.js`: 45 líneas
+- `src/ejercicios/ejercicio2UsuarioAlbumesFotografias.js`: 210 líneas
+- `src/ejercicios/ejercicio3PostsConComentarios.js`: 131 líneas
+- `src/ejercicios/ejercicio4UsuariosSimplificados.js`: 39 líneas
+- `src/ejercicios/ejercicio5UsuariosCompletos.js`: 136 líneas
 
 ### Total de Archivos JavaScript: 10
 ### Total de Módulos: 5 ejercicios + 3 utilidades + 1 menú + 1 barril
